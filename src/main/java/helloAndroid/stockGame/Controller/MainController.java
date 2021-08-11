@@ -36,6 +36,7 @@ public class MainController {
     @ResponseBody
     public String findStockInfo(@RequestParam("recivename") String recivename){
         log.info("recivename={}",recivename);
+
         stockInfo stock = service.findStock(recivename);
         return null;
     }
