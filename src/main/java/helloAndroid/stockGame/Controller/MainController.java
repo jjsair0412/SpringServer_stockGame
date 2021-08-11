@@ -2,10 +2,14 @@ package helloAndroid.stockGame.Controller;
 
 import helloAndroid.stockGame.Service.MainServiceImpl;
 import helloAndroid.stockGame.StockData.stockInfo;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@Slf4j
+@RequestMapping("/info")
 public class MainController {
     private MainServiceImpl service;
 
@@ -15,7 +19,7 @@ public class MainController {
     }
 
     // 모든 종목정보 가져오기
-    @GetMapping("/info")
+    @GetMapping
     @ResponseBody
     public stockInfo[] allStockInfo(){
         stockInfo stockInfo = service.StockSave("1번종목", 30000);
@@ -26,4 +30,14 @@ public class MainController {
 
         return Arr1;
     }
+
+    // 각종목별 정보 가져오기 / 내가 산종목정보 포함
+    @PostMapping
+    @ResponseBody
+    public String findStockInfo(@RequestParam("recivename") String recivename){
+        log.info("recivename={}",recivename);
+        stockInfo stock = service.findStock(recivename);
+        return null;
+    }
+
 }

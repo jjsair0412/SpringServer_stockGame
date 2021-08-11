@@ -22,6 +22,6 @@ public class MainServiceImpl implements MainService{
 
     @Override
     public stockInfo findStock(String stock_name) {
-        return null;
+        return memoryRepository.findByName(stock_name);
     }
 }
