@@ -1,12 +1,14 @@
 package helloAndroid.stockGame.Repository;
 
 import helloAndroid.stockGame.StockData.stockInfo;
+import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Repository
 public class MemoryRepository {
     private static Map<String, stockInfo> store = new HashMap<>();
 
