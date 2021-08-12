@@ -1,6 +1,6 @@
 package helloAndroid.stockGame.Service;
 
-import helloAndroid.stockGame.StockData.stockInfo;
+import helloAndroid.stockGame.DTO.stockInfo;
 
 public interface MainService {
     stockInfo StockSave(String stock_name, Integer stock_price);

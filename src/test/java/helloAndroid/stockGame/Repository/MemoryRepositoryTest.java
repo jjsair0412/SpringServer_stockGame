@@ -1,7 +1,6 @@
 package helloAndroid.stockGame.Repository;
 
-import helloAndroid.stockGame.StockData.stockInfo;
-import org.assertj.core.api.Assertions;
+import helloAndroid.stockGame.DTO.stockInfo;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -10,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 
 
 class MemoryRepositoryTest {

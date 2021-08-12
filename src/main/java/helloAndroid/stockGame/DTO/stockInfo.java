@@ -1,4 +1,4 @@
-package helloAndroid.stockGame.StockData;
+package helloAndroid.stockGame.DTO;
 
 import lombok.Getter;
 import lombok.Setter;

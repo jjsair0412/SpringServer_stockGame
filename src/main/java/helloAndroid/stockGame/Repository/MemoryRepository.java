@@ -1,6 +1,6 @@
 package helloAndroid.stockGame.Repository;
 
-import helloAndroid.stockGame.StockData.stockInfo;
+import helloAndroid.stockGame.DTO.stockInfo;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
