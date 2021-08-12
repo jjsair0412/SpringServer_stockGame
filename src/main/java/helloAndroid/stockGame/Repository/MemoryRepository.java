@@ -1,6 +1,8 @@
 package helloAndroid.stockGame.Repository;
 
 import helloAndroid.stockGame.DTO.stockInfo;
+import helloAndroid.stockGame.Entity.stockEntity;
+import helloAndroid.stockGame.Repository.RepositoryInterface.RepositoryInter;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -9,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class MemoryRepository {
+public class MemoryRepository implements RepositoryInter {
     private static Map<String, stockInfo> store = new HashMap<>();
 
     // 저장
@@ -38,5 +40,25 @@ public class MemoryRepository {
     // 테스트용
     public void clear(){
         store.clear();
+    }
+
+    @Override
+    public int save(stockEntity entity) {
+        return 0;
+    }
+
+    @Override
+    public stockEntity stockSelect(stockEntity entity) {
+        return null;
+    }
+
+    @Override
+    public int stockUpdate(stockEntity entity) {
+        return 0;
+    }
+
+    @Override
+    public int stockDelete(stockEntity entity) {
+        return 0;
     }
 }

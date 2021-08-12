@@ -2,6 +2,7 @@ package helloAndroid.stockGame.Repository;
 
 import helloAndroid.stockGame.DTO.stockInfo;
 import helloAndroid.stockGame.Entity.stockEntity;
+import helloAndroid.stockGame.Repository.RepositoryInterface.RepositoryInter;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.cfg.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ import java.util.List;
 
 @Repository
 @Slf4j
-public class DatabaseRepository {
+public class DatabaseRepository implements RepositoryInter {
 
 //    @Value("${spring.datasource.driver-class-name}")
     private String driver="com.mysql.cj.jdbc.Driver";
