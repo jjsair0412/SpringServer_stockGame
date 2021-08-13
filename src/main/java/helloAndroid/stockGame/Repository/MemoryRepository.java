@@ -3,6 +3,7 @@ package helloAndroid.stockGame.Repository;
 import helloAndroid.stockGame.DTO.stockInfo;
 import helloAndroid.stockGame.Entity.stockEntity;
 import helloAndroid.stockGame.Repository.RepositoryInterface.RepositoryInter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -10,9 +11,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Repository
 public class MemoryRepository implements RepositoryInter {
     private static Map<String, stockInfo> store = new HashMap<>();
+    private static Map<String, stockEntity> store2 = new HashMap<>(); // 다형성 구현 실패로인한 메모리
 
     // 저장
     public stockInfo save(stockInfo stockinfo){
@@ -44,21 +47,45 @@ public class MemoryRepository implements RepositoryInter {
 
     @Override
     public int save(stockEntity entity) {
-        return 0;
+        store2.put(entity.getStockName(), entity);
+        boolean contains = store2.containsKey(entity.getStockName());
+        if (contains==true){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     @Override
     public stockEntity stockSelect(stockEntity entity) {
-        return null;
+        return store2.get(entity.getStockName());
     }
 
     @Override
     public int stockUpdate(stockEntity entity) {
-        return 0;
+        stockEntity updateEntity = store2.get(entity.getStockName());
+        updateEntity.setStockName(entity.getStockName());
+        updateEntity.setStockPrice(entity.getStockPrice());
+
+        int entityStockPrice = entity.getStockPrice();
+        int updateResultPrice = updateEntity.getStockPrice();
+
+        if (entityStockPrice==updateResultPrice){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 
     @Override
     public int stockDelete(stockEntity entity) {
-        return 0;
+        store2.remove(store2.get(entity.getStockName()));
+        boolean result = store2.containsKey(entity.getStockName());
+        if (result == true){
+            return 1;
+        }else{
+            return 0;
+        }
+
     }
 }

@@ -61,7 +61,7 @@ public class DatabaseRepository implements RepositoryInter {
         return result;
     }
 
-    // select구문
+    // select구문 -> 한가지종목 조회
     public stockEntity stockSelect(stockEntity entity) {
         List<stockEntity> stocks = null;
         final String sql = "SELECT * FROM stocklist WHERE StockName = ?";
