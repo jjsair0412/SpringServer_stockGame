@@ -71,6 +71,7 @@ public class MainServiceImpl implements MainService{
         return databaseRepository.stockUpdate(stockentity);
     }
 
+    // 매도
     public stockEntity toChangeStock(String ChangeStockName){
         stockentity.setStockName(ChangeStockName);
 
@@ -78,6 +79,19 @@ public class MainServiceImpl implements MainService{
         int entityStockPrice = entity.getStockPrice();
 
         entity.setStockPrice(entityStockPrice+1000);
+        databaseRepository.stockUpdate(entity);
+
+        return databaseRepository.stockSelect(entity);
+    }
+
+    // 매수
+    public stockEntity toSellStock(String ChangeStockName){
+        stockentity.setStockName(ChangeStockName);
+
+        stockEntity entity = databaseRepository.stockSelect(stockentity);
+        int entityStockPrice = entity.getStockPrice();
+
+        entity.setStockPrice(entityStockPrice-1000);
         databaseRepository.stockUpdate(entity);
 
         return databaseRepository.stockSelect(entity);

@@ -2,7 +2,6 @@ package helloAndroid.stockGame.Controller;
 
 import helloAndroid.stockGame.Entity.stockEntity;
 import helloAndroid.stockGame.Service.MainServiceImpl;
-import helloAndroid.stockGame.DTO.stockInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -37,9 +36,17 @@ public class MainController {
         return service.DbStockfind(entity);
     }
 
+    // 매수햇을 경우
     @PostMapping("/toChange")
-    public stockEntity changePrice(@RequestParam("change_stock_price") String changePrice){
-        return service.toChangeStock(changePrice);
+    public int changePrice(@RequestParam("change_stock_price") String changePrice){
+        stockEntity entity = service.toChangeStock(changePrice);
+        return entity.getStockPrice();
     }
 
+    // 매도햇을 경우
+    @PostMapping("/toSell")
+    public int sellChangePrice(@RequestParam("change_stock_name") String changeName){
+        stockEntity entity = service.toSellStock(changeName);
+        return entity.getStockPrice();
+    }
 }
