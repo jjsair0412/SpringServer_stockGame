@@ -37,7 +37,7 @@ public class MainController {
     }
 
     // 매수햇을 경우
-    @PostMapping("/toChange")
+    @PostMapping("/toBuy")
     public int changePrice(@RequestParam("change_stock_price") String changePrice){
         stockEntity entity = service.toChangeStock(changePrice);
         return entity.getStockPrice();
