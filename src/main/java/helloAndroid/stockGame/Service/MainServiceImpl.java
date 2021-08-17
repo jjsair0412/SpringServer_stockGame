@@ -8,21 +8,26 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Slf4j
 public class MainServiceImpl implements MainService{
 
-    private MemoryRepository memoryRepository;
+
+//    private MemoryRepository memoryRepository;
     private DatabaseRepository databaseRepository;
     private stockEntity stockentity;
 
     @Autowired
-    public MainServiceImpl(MemoryRepository memoryRepository, DatabaseRepository databaseRepository, stockEntity stockentity){
-        this.memoryRepository = memoryRepository;
+    public MainServiceImpl(/**MemoryRepository memoryRepository, **/DatabaseRepository databaseRepository, stockEntity stockentity){
+//        this.memoryRepository = memoryRepository;
         this.databaseRepository = databaseRepository;
         this.stockentity = stockentity;
     }
 
+    /**
+     * 다형성 구현 실패
     @Override
     public stockInfo StockSave(String stock_name, int stock_price) {
         return memoryRepository.save(new stockInfo(stock_name,stock_price));
@@ -36,6 +41,7 @@ public class MainServiceImpl implements MainService{
         return byName;
     }
 
+     **/
     @Override
     public int DbStockSave(String stock_name, int stock_price) {
         stockentity.setStockName(stock_name);
@@ -50,8 +56,30 @@ public class MainServiceImpl implements MainService{
     }
 
     @Override
-    // 전체 종목정보 조회
+    // 한가지 종목정보 조회
     public stockEntity DbStockfind(stockEntity stockentity) {
         return databaseRepository.stockSelect(stockentity);
+    }
+
+    @Override
+    public List<stockEntity> DbStockfindAll() {
+        return databaseRepository.stockFindAll();
+    }
+
+    @Override
+    public int DbStockUpdate(stockEntity stockentity) {
+        return databaseRepository.stockUpdate(stockentity);
+    }
+
+    public stockEntity toChangeStock(String ChangeStockName){
+        stockentity.setStockName(ChangeStockName);
+
+        stockEntity entity = databaseRepository.stockSelect(stockentity);
+        int entityStockPrice = entity.getStockPrice();
+
+        entity.setStockPrice(entityStockPrice+1000);
+        databaseRepository.stockUpdate(entity);
+
+        return databaseRepository.stockSelect(entity);
     }
 }

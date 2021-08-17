@@ -3,11 +3,16 @@ package helloAndroid.stockGame.Repository;
 import helloAndroid.stockGame.DTO.stockInfo;
 import helloAndroid.stockGame.Entity.stockEntity;
 import org.aspectj.lang.annotation.After;
+import org.aspectj.lang.annotation.Before;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
+import static org.assertj.core.api.Assertions.as;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -21,7 +26,7 @@ class DatabaseRepositoryTest {
     @AfterEach
     void delete(){
         //given
-        stockInfo = new stockInfo("주진2성",1300);
+        stockInfo = new stockInfo("주진성",1300);
 
         stockentity.setStockName(stockInfo.getStock_name());
         stockentity.setStockPrice(stockInfo.getStock_price());
@@ -33,7 +38,7 @@ class DatabaseRepositoryTest {
     @BeforeEach
     void save() {
         //given
-        stockInfo = new stockInfo("주진2성",1300);
+        stockInfo = new stockInfo("주진성",1300);
 
         stockentity.setStockName(stockInfo.getStock_name());
         stockentity.setStockPrice(stockInfo.getStock_price());
@@ -65,4 +70,23 @@ class DatabaseRepositoryTest {
         assertThat(result).isEqualTo(1);
     }
 
+    @Test
+    void stockFindAll(){
+        //given
+        String stockName = null;
+        int stockPrice = 0;
+
+        //when
+        List<stockEntity> stockEntities = databaseRepository.stockFindAll();
+
+
+        for (stockEntity entitys:stockEntities) {
+            stockName = entitys.getStockName();
+            stockPrice = entitys.getStockPrice();
+        }
+        //then
+        assertThat(stockName).isEqualTo("주진성");
+        assertThat(stockPrice).isEqualTo(1300);
+
+    }
 }

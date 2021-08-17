@@ -88,4 +88,9 @@ public class MemoryRepository implements RepositoryInter {
         }
 
     }
+
+    @Override
+    public List<stockEntity> stockFindAll() {
+        return null;
+    }
 }

@@ -90,6 +90,36 @@ public class DatabaseRepository implements RepositoryInter {
         }
     }
 
+    // 전체종목 조회
+    public List<stockEntity> stockFindAll() {
+        List<stockEntity> stocks = null;
+        final String sql = "SELECT * FROM stocklist";
+
+        stocks = template.query(sql, new PreparedStatementSetter() {
+
+            @Override
+            public void setValues(PreparedStatement pstmt) throws SQLException {
+
+            }
+        }, new RowMapper<stockEntity>() {
+
+            @Override
+            public stockEntity mapRow(ResultSet rs, int rowNum) throws SQLException {
+                stockEntity entity = new stockEntity();
+                entity.setStockName(rs.getString("StockName"));
+                entity.setStockPrice(rs.getInt("StockPrice"));
+                return entity;
+            }
+
+        });
+        if (stocks.isEmpty()) {
+            return null;
+        } else {
+            return stocks;
+        }
+    }
+
+
 
     //update 구문
     public int stockUpdate(stockEntity entity){
